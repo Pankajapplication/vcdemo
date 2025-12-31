@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoCrypt · Media Player Demo</title>
+    <link rel="stylesheet" href="http://localhost/vc/website_assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.videocrypt.com/website_assets/css/fonts.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+        integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <link rel="canonical" href="http://localhost/vc/dashboard" />
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+    <div class="d-flex min-vh-100 overflow-hidden">
+
+         <aside id="sidebar" class="bg-dark text-white d-flex flex-column">
+            <div class="d-flex align-items-center justify-content-between px-3 py-3 border-bottom">
+                <span class="logo-text">My Dashboard</span>
+                <button id="toggleBtn" class="btn btn-sm btn-outline-light">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="nav flex-column mt-2">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link d-flex align-items-center text-white px-3 active">
+                        <i class="fas fa-home"></i>
+                        <span class="link-text ml-3">Analytics Overview</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="media-player.html" class="nav-link d-flex align-items-center text-white px-3">
+                        <!-- <i class="fas fa-chart-line"></i> -->
+                        <i class="fas fa-video"></i>
+                        <span class="link-text ml-3">Media Player</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-users"></i>
+                        <span class="link-text ml-3">VOD Library</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-cog"></i>
+                        <span class="link-text ml-3">Recommendation</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-cog"></i>
+                        <span class="link-text ml-3">Annalytics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-cog"></i>
+                        <span class="link-text ml-3">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-cog"></i>
+                        <span class="link-text ml-3">Settings</span>
+                    </a>
+                </li>
+            </ul>
+
+        </aside>
+        <main class="flex-fill dashboard p-4">
+            <div class="demo-disclaimer text-secondary text-center mb-4">
+                <span>
+                    Demo only · All analytics data shown is sample and illustrative
+                </span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="text-white mb-0">Dashboard</h4>
+                <div class="d-flex gap-2">
+                    <input type="text" class="form-control form-control-sm search-input"
+                        placeholder="Search videos, folders..." disabled title="Demo Purpose Only">
+                    <button class="btn btn-sm btn-dark" title="Demo Purpose Only">New</button>
+                </div>
+            </div>
+            <!-- <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="card stat-card">
+                        <h6>Views</h6>
+                        <h3>742</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card">
+                        <h6>Plays</h6>
+                        <h3>1,337</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stat-card">
+                        <h6>Downloads</h6>
+                        <h3>244</h3>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="card chart-card mb-4">
+                <h6 class="mb-3">Sample Overview</h6>
+                <div style="height:400px;">
+                    <canvas id="overviewChart"></canvas>
+                </div>
+                <small class="text-muted mt-4 text-center">Data shown is illustrative</small>
+            </div> -->
+            <!-- <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="card chart-card">
+                        <h6>Top Regions (Sample)</h6>
+                        <div id="geoChart" style="height:250px;"></div>
+                        <small class="text-muted mt-4 text-center">Data shown is illustrative</small>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card chart-card Topdevices">
+                        <h6>Device Distribution (Sample)</h6>
+                        <div class="device">
+                            <span>Desktop</span>
+                            <div class="bar"><span style="width:80%"></span></div>
+                        </div>
+                        <div class="device">
+                            <span>Mobile</span>
+                            <div class="bar"><span style="width:60%"></span></div>
+                        </div>
+                        <div class="device">
+                            <span>Tablet</span>
+                            <div class="bar"><span style="width:30%"></span></div>
+                        </div>
+                        <small class="text-muted mt-auto text-center">Data shown is illustrative</small>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="row g-3 mt-3">
+                <div class="col-md-6">
+                    <div class="card chart-card h-100">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Top Sources (Sample)</h6>
+                            <a href="javascript:void(0);" class="text-muted small">View all source data</a>
+                        </div>
+                        <div class="d-flex">
+                            <div id="donutChart" style="width:260px;height:260px;"></div>
+
+                            <div class="flex-fill ps-3">
+                                <div class="source-row">
+                                    <div>
+                                        <span class="dot blue"></span> tryangle.com
+                                    </div>
+                                    <span class="value">1,045</span>
+                                </div>
+                                <div class="source-row">
+                                    <div>
+                                        <span class="dot teal"></span> Unknown
+                                    </div>
+                                    <span class="value">249</span>
+                                </div>
+                                <div class="source-row">
+                                    <div>
+                                        <span class="dot green"></span> serenberry.org
+                                    </div>
+                                    <span class="value">39</span>
+                                </div>
+                                <div class="source-row">
+                                    <div>
+                                        <span class="dot purple"></span> trevorglass.net
+                                    </div>
+                                    <span class="value">33</span>
+                                </div>
+                                <div class="source-row">
+                                    <div>
+                                        <span class="dot yellow"></span> evanpotter.com
+                                    </div>
+                                    <span class="value">30</span>
+                                </div>
+                                <div class="source-row">
+                                    <div>
+                                        <span class="dot gray"></span> Other
+                                    </div>
+                                    <span class="value">58</span>
+                                </div>
+                            </div>
+                        </div>
+                        <small class="text-muted mt-4 text-center">Data shown is illustrative</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card chart-card h-100">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Top Videos (Sample)</h6>
+                            <a href="javascript:void(0);" class="text-muted small">View all video data</a>
+                        </div>
+
+                        <div class="video-item">
+                            <img src="assets/img/hq720.avif" />
+                            <div class="flex-fill ms-3">
+                                <div class="title">June Campaign Kickoff</div>
+                                <small>Uploaded Feb 17</small>
+                            </div>
+                            <span class="views">1,001</span>
+                        </div>
+
+                        <div class="video-item">
+                            <img src="assets/img/hq720.avif" />
+                            <div class="flex-fill ms-3">
+                                <div class="title">Team Meeting</div>
+                                <small>Uploaded Feb 16</small>
+                            </div>
+                            <span class="views">197</span>
+                        </div>
+
+                        <div class="video-item">
+                            <img src="assets/img/hq720.avif" />
+                            <div class="flex-fill ms-3">
+                                <div class="title">Sand and Stone</div>
+                                <small>Uploaded Feb 17</small>
+                            </div>
+                            <span class="views">89</span>
+                        </div>
+                        <small class="text-muted text-center mt-auto">Data shown is illustrative</small>
+                    </div>
+                </div>
+            </div> -->
+            <div class="container">
+                <div class="card chart-card mb-4">
+                    <div class="row g-4 align-items-start">
+                        <div class="col-md-8">
+                            <video id="demoVideo"
+                                class="w-100 rounded"
+                                controls
+                                poster="assets/img/hq720.avif">
+                                <source src="assets/video/video-demo.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <small class="text-muted d-block text-center mt-2">
+                                HTML5 Media Player · Demo Playback
+                            </small>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="mb-2">June Campaign Kickoff</h6>
+
+                            <p class="small text-muted">
+                                This sample video demonstrates the VideoCrypt media player interface.
+                                All content and metadata shown here are for demo purposes only.
+                            </p>
+
+                            <ul class="list-unstyled small text-muted">
+                                <li><strong>Duration:</strong> 02:14</li>
+                                <li><strong>Uploaded:</strong> Feb 17, 2025</li>
+                                <li><strong>Resolution:</strong> 1080p</li>
+                                <li><strong>Status:</strong> Demo</li>
+                            </ul>
+
+                            <div class="mt-3">
+                                <span class="badge bg-secondary">HTML5 Player</span>
+                                <span class="badge bg-secondary">Sample Asset</span>
+                                <span class="badge bg-secondary">Demo Mode</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="demo-disclaimer mt-4 text-center text-secondary">
+                <span>
+                    Demo only · All analytics data shown is sample and illustrative
+                </span>
+            </div>
+        </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/chart.js"></script>
+</body>
+
+</html>

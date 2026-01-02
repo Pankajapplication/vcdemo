@@ -12,7 +12,11 @@ body{
 #sidebar.collapsed {
     width: 70px;
 }
-
+.logo{
+    width: 130px;
+    height: 50px;
+    object-fit: contain;
+}
 /* text hide */
 #sidebar.collapsed .link-text,
 #sidebar.collapsed .logo-text {

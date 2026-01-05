@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAM · Media Asset Management</title>
+<link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0d1117;
+  color: #e6edf3;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* Layout */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar FIX (no visual change) */
+#sidebar {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+/* Main */
+.main {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Header */
+.header h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+.header p {
+  color: #8b949e;
+  font-size: 0.9rem;
+}
+
+/* Grid */
+.grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* Cards */
+.card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+.card:hover {
+  border-color: #58a6ff;
+  transition: 0.2s;
+}
+
+/* Rows */
+.row-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px dashed #2f353d;
+}
+.row-item:last-child {
+  border-bottom: none;
+}
+
+.row-item i {
+  color: #58a6ff;
+  margin-top: 4px;
+}
+
+.row-item small {
+  display: block;
+  font-size: 0.75rem;
+  color: #8b949e;
+}
+
+/* Status */
+.status {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  font-size: 0.9rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+}
+
+.ingested { background: #0f5132; color: #75e0a7; }
+.processing { background: #332701; color: #ffd966; }
+.secured { background: #1f2a44; color: #8ab4ff; }
+.archived { background: #3a1d1d; color: #fca5a5; }
+
+/* Stats */
+.stats {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.stat {
+  background: linear-gradient(135deg, #1c2128, #0d1117);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.stat span {
+  font-size: 0.75rem;
+  color: #8b949e;
+}
+
+.stat h2 {
+  margin: 0.5rem 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<!-- ================= SIDEBAR (UNCHANGED) ================= -->
+<aside id="sidebar" class="bg-dark text-white d-flex flex-column">
+  <div class="d-flex align-items-center justify-content-between px-3 py-3 border-bottom">
+    <span class="logo-text">My Dashboard</span>
+    <button id="toggleBtn" class="btn btn-sm btn-outline-light">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+
+  <ul class="nav flex-column mt-2">
+    <li class="nav-item">
+      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+        <i class="fas fa-home"></i>
+        <span class="ml-3">Analytics Overview</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+        <i class="fas fa-video"></i>
+        <span class="ml-3">Media Player</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+        <i class="fas fa-folder-open"></i>
+        <span class="ml-3">VOD Library</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link d-flex align-items-center text-white px-3 active">
+        <i class="fas fa-database"></i>
+        <span class="ml-3">MAM</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+        <i class="fas fa-chart-line"></i>
+        <span class="ml-3">Analytics</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+        <i class="fas fa-users"></i>
+        <span class="ml-3">Users</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+        <i class="fas fa-cog"></i>
+        <span class="ml-3">Settings</span>
+      </a>
+    </li>
+  </ul>
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="main">
+
+  <div class="header">
+    <h1>Media Asset Management (MAM)</h1>
+    <p>Centralized system to ingest, manage, secure and distribute media assets</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- Core Functions -->
+    <div class="card">
+      <h3>MAM Core Functions</h3>
+
+      <div class="row-item">
+        <i class="fas fa-upload"></i>
+        <div>
+          Media Ingest
+          <small>Upload video, audio, subtitles & images</small>
+        </div>
+      </div>
+
+      <div class="row-item">
+        <i class="fas fa-tags"></i>
+        <div>
+          Metadata Management
+          <small>Searchable technical & descriptive metadata</small>
+        </div>
+      </div>
+
+      <div class="row-item">
+        <i class="fas fa-copy"></i>
+        <div>
+          Asset Versioning
+          <small>Multiple edits & renditions</small>
+        </div>
+      </div>
+
+      <div class="row-item">
+        <i class="fas fa-lock"></i>
+        <div>
+          Security & DRM
+          <small>Role-based access control</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lifecycle -->
+    <div class="card">
+      <h3>Asset Lifecycle</h3>
+
+      <div class="status">
+        <span>Raw Upload</span>
+        <span class="badge ingested">Ingested</span>
+      </div>
+
+      <div class="status">
+        <span>Proxy Generation</span>
+        <span class="badge processing">Processing</span>
+      </div>
+
+      <div class="status">
+        <span>Review & Approval</span>
+        <span class="badge secured">Secured</span>
+      </div>
+
+      <div class="status">
+        <span>OTT / Broadcast</span>
+        <span class="badge secured">DRM Ready</span>
+      </div>
+
+      <div class="status">
+        <span>Archive</span>
+        <span class="badge archived">Archived</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <span>Total Assets</span>
+      <h2>21,340</h2>
+    </div>
+
+    <div class="stat">
+      <span>Active Pipelines</span>
+      <h2>118</h2>
+    </div>
+
+    <div class="stat">
+      <span>Secure Deliveries</span>
+      <h2>99.9%</h2>
+    </div>
+  </div>
+
+</main>
+</div>
+
+</body>
+</html>

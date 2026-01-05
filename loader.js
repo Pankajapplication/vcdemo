@@ -4,7 +4,7 @@ let circleBx = document.querySelector('.profile-bx');
 function progressBar(value){
     circleBx.style.setProperty(
         'background',
-        `conic-gradient(red ${percent.textContent}, #ddd 0%)`
+        `conic-gradient(rgba(219, 81, 1, 1) ${percent.textContent}, #ddd 0%)`
     );
 }
 

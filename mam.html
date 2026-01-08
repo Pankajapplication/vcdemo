@@ -27,7 +27,7 @@ body {
 
 /* Sidebar FIX (no visual change) */
 #sidebar {
-  width: 240px;
+  width: 20%;
   flex-shrink: 0;
 }
 
@@ -145,68 +145,61 @@ body {
 
 <div class="dashboard">
 
-<!-- ================= SIDEBAR (UNCHANGED) ================= -->
 <aside id="sidebar" class="bg-dark text-white d-flex flex-column">
-  <div class="d-flex align-items-center justify-content-between px-3 py-3 border-bottom">
-    <span class="logo-text">My Dashboard</span>
-    <button id="toggleBtn" class="btn btn-sm btn-outline-light">
-      <i class="fas fa-bars"></i>
-    </button>
-  </div>
+            <div class="d-flex align-items-center justify-content-between px-3 py-3 border-bottom">
+                <span class="logo-text">My Dashboard</span>
+                <button id="toggleBtn" class="btn btn-sm btn-outline-light">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
 
-  <ul class="nav flex-column mt-2">
-    <li class="nav-item">
-      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
-        <i class="fas fa-home"></i>
-        <span class="ml-3">Analytics Overview</span>
-      </a>
-    </li>
+            <ul class="nav flex-column mt-2">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-home"></i>
+                        <span class="link-text ml-3">Analytics Overview</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="media-player.html" class="nav-link d-flex align-items-center text-white px-3">
+                        <!-- <i class="fas fa-chart-line"></i> -->
+                        <i class="fas fa-video"></i>
+                        <span class="link-text ml-3">Media Player</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="vod.html" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-users"></i>
+                        <span class="link-text ml-3">VOD Library</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="recommendation.html" class="nav-link d-flex align-items-center text-white px-3 active">
+                        <i class="fas fa-cog"></i>
+                        <span class="link-text ml-3">Recommendation</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="mam.html" title="Media Assets Management" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-cog"></i>
+                        <span class="link-text ml-3">MAM</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-cog"></i>
+                        <span class="link-text ml-3">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-cog"></i>
+                        <span class="link-text ml-3">Settings</span>
+                    </a>
+                </li>
+            </ul>
 
-    <li class="nav-item">
-      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
-        <i class="fas fa-video"></i>
-        <span class="ml-3">Media Player</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
-        <i class="fas fa-folder-open"></i>
-        <span class="ml-3">VOD Library</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a href="#" class="nav-link d-flex align-items-center text-white px-3 active">
-        <i class="fas fa-database"></i>
-        <span class="ml-3">MAM</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
-        <i class="fas fa-chart-line"></i>
-        <span class="ml-3">Analytics</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
-        <i class="fas fa-users"></i>
-        <span class="ml-3">Users</span>
-      </a>
-    </li>
-
-    <li class="nav-item">
-      <a href="#" class="nav-link d-flex align-items-center text-white px-3">
-        <i class="fas fa-cog"></i>
-        <span class="ml-3">Settings</span>
-      </a>
-    </li>
-  </ul>
 </aside>
-
-<!-- ================= MAIN CONTENT ================= -->
 <main class="main">
 
   <div class="header">
@@ -215,8 +208,6 @@ body {
   </div>
 
   <div class="grid">
-
-    <!-- Core Functions -->
     <div class="card">
       <h3>MAM Core Functions</h3>
 
@@ -284,8 +275,6 @@ body {
     </div>
 
   </div>
-
-  <!-- Stats -->
   <div class="stats">
     <div class="stat">
       <span>Total Assets</span>
@@ -302,9 +291,7 @@ body {
       <h2>99.9%</h2>
     </div>
   </div>
-
 </main>
 </div>
-
 </body>
 </html>

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoCrypt · Media Player Demo</title>
+    <title>VideoCrypt · Analytics Demo</title>
     <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://www.videocrypt.com/website_assets/css/fonts.css">
     <link rel="stylesheet" href="assets/css/style.css">
@@ -15,15 +14,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-    <link rel="canonical" href="http://localhost/vc/dashboard" />
     <script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body>
     <div class="d-flex min-vh-100 overflow-hidden">
-         <aside id="sidebar" class="bg-dark text-white d-flex flex-column">
+        <aside id="sidebar" class="bg-dark text-white d-flex flex-column">
             <div class="d-flex align-items-center justify-content-between px-3 py-3 border-bottom">
-                <span class="logo-text">My Dashboard</span>
+                <span class="logo-text">
+                    <img src="assets/img/logo.png" alt="" class="logo">
+                </span>
                 <button id="toggleBtn" class="btn btn-sm btn-outline-light">
                     <i class="fas fa-bars"></i>
                 </button>
@@ -33,44 +33,34 @@
                 <li class="nav-item">
                     <a href="index.html" class="nav-link d-flex align-items-center text-white px-3">
                         <i class="fas fa-home"></i>
-                        <span class="link-text ml-3">Analytics Overview</span>
+                        <span class="link-text ml-3" title="Analytics Overview">Analytics Overview</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a href="media-player.html" class="nav-link d-flex align-items-center text-white px-3 active">
-                        <!-- <i class="fas fa-chart-line"></i> -->
                         <i class="fas fa-video"></i>
-                        <span class="link-text ml-3">Media Player</span>
+                        <span class="link-text ml-3" title="Media Player">Media Player</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a href="vod.html" class="nav-link d-flex align-items-center text-white px-3">
                         <i class="fas fa-users"></i>
-                        <span class="link-text ml-3">VOD Library</span>
+                        <span class="link-text ml-3" title="Video On Demand">VOD Library</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="recommendation.html" class="nav-link d-flex align-items-center text-white px-3">
+                        <i class="fas fa-cog"></i>
+                        <span class="link-text ml-3" title="Recommendation Engine">Recommendation</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="recommendation.html" class="nav-link d-flex align-items-center text-white px-3">
                         <i class="fas fa-cog"></i>
-                        <span class="link-text ml-3">Recommendation</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
-                        <i class="fas fa-cog"></i>
-                        <span class="link-text ml-3">Annalytics</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
-                        <i class="fas fa-cog"></i>
-                        <span class="link-text ml-3">Users</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link d-flex align-items-center text-white px-3">
-                        <i class="fas fa-cog"></i>
-                        <span class="link-text ml-3">Settings</span>
+                        <span class="link-text ml-3" title="Media Assets Management">MAM</span>
                     </a>
                 </li>
             </ul>
@@ -143,5 +133,4 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/chart.js"></script>
 </body>
-
 </html>

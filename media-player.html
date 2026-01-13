@@ -73,14 +73,14 @@
                 </span>
             </div>
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h4 class="text-white mb-0">Dashboard</h4>
+                <h4 class="text-white mb-0">Media Player</h4>
                 <div class="d-flex gap-2">
                     <input type="text" class="form-control form-control-sm search-input"
                         placeholder="Search videos, folders..." disabled title="Demo Purpose Only">
                     <button class="btn btn-sm btn-dark" title="Demo Purpose Only">New</button>
                 </div>
             </div>
-            <div class="container">
+            <div class="container px-0">
                 <div class="card chart-card mb-4">
                     <div class="row g-4 align-items-start">
                         <div class="col-md-8">
@@ -88,13 +88,9 @@
                                 class="w-100 rounded"
                                 controls
                                 poster="assets/img/hq720.avif">
-                                <source src="assets/video/video-demo.mp4" type="video/mp4">
+                                <source src="assets/video/video-demo-0.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
-
-                            <small class="text-muted d-block text-center mt-2">
-                                HTML5 Media Player · Demo Playback
-                            </small>
                         </div>
                         <div class="col-md-4">
                             <h6 class="mb-2">June Campaign Kickoff</h6>
@@ -117,7 +113,21 @@
                                 <span class="badge bg-secondary">Demo Mode</span>
                             </div>
                         </div>
-
+                        <small class="w-100 border-top pt-2 border-secondary text-muted d-block text-center mt-2">
+                            HTML5 Media Player · Demo Playback
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="text-white mb-0">Videos To Play</h4>
+            </div>
+            <div class="container px-0">
+                <div class="card chart-card mb-4">
+                    <div class="row g-4 align-items-start" id="videoPlay">
+                        <!-- <small class="w-100 border-top pt-2 border-secondary text-muted d-block text-center mt-2">
+                            HTML5 Media Player · Demo Playback
+                        </small> -->
                     </div>
                 </div>
             </div>
@@ -132,5 +142,110 @@
     <script src="assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/chart.js"></script>
+    <script>
+     let videoDemo = {
+    video1: {
+        title:'video title 1',
+        duration:'2:14',
+        uploadDate:'Feb 17, 2025',
+        resolution:'1080p',
+        status:'Demo',
+        thumbnail:'assets/img/img-1.jpg',
+        url:'assets/video/video-demo-1.mp4',
+        description: 'This is a demo video showing VideoCrypt media player features.',
+    },
+    video2: {
+        title:'video title 2',
+        duration:'2:14',
+        uploadDate:'Feb 17, 2025',
+        resolution:'1080p',
+        status:'Uploaded',
+        thumbnail:'assets/img/img-2.jpg',
+        url:'assets/video/video-demo-2.mp4',
+        description: 'This video demonstrates uploaded video functionality in the player.',
+    },
+    video3: {
+        title:'video title 3',
+        duration:'2:14',
+        uploadDate:'Feb 17, 2025',
+        resolution:'1080p',
+        status:'Uploaded',
+        thumbnail:'assets/img/img-3.jpg',
+        url:'assets/video/video-demo-3.mp4',
+        description: 'This video demonstrates uploaded video functionality in the player.',
+    },
+    video4: {
+        title:'video title 4',
+        duration:'2:14',
+        uploadDate:'Feb 17, 2025',
+        resolution:'1080p',
+        status:'Uploaded',
+        thumbnail:'assets/img/img-4.jpg',
+        url:'assets/video/video-demo-4.mp4',
+        description: 'This video demonstrates uploaded video functionality in the player.',
+    },
+};
+
+const videoPlaylistWrapper = document.querySelector('#videoPlay');
+const demoVideo = document.querySelector('#demoVideo');
+const descPara = document.getElementById('videoDescription');
+const videoKeys = Object.keys(videoDemo);
+
+// Render playlist
+let html = '';
+for (let i = 0; i < videoKeys.length; i++) {
+    const key = videoKeys[i];
+    const video = videoDemo[key];
+
+    html += `
+    <div class="col-lg-3">
+            <div class="playlist-video video-thumbnail position-relative d-inline-block w-100" data-key="${key}">
+                <img src="${video.thumbnail}" class="img-fluid rounded w-100" alt="Video thumbnail">
+                <span class="play-icon pulse">
+                    ▶
+                </span>
+            </div>
+        </div>
+    `;
+}
+
+videoPlaylistWrapper.innerHTML = html;
+
+// Add click event to each playlist video
+document.querySelectorAll('.playlist-video').forEach(item => {
+    item.addEventListener('click', function() {
+        const key = this.getAttribute('data-key');
+        const video = videoDemo[key];
+
+        // Update main player source
+        demoVideo.src = video.url;
+        demoVideo.poster = video.thumbnail;
+        demoVideo.play();
+
+        // Update main player metadata
+        const infoSection = demoVideo.closest('.row').querySelector('.col-md-4');
+        infoSection.querySelector('h6').textContent = video.title;
+        const infoList = infoSection.querySelectorAll('ul.list-unstyled li');
+        infoList[0].innerHTML = `<strong>Duration:</strong> ${video.duration}`;
+        infoList[1].innerHTML = `<strong>Uploaded:</strong> ${video.uploadDate}`;
+        infoList[2].innerHTML = `<strong>Resolution:</strong> ${video.resolution}`;
+        infoList[3].innerHTML = `<strong>Status:</strong> ${video.status}`;
+
+        // Update badges dynamically
+        const badgeContainer = infoSection.querySelector('div.mt-3');
+        badgeContainer.innerHTML = `
+            <span class="badge bg-secondary">${video.status} Video</span>
+            <span class="badge bg-secondary">Demo Mode</span>
+        `;
+
+        // Update description dynamically
+        // descPara.textContent = video.description;
+
+        document.querySelectorAll('.playlist-video').forEach(v => v.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
+
+    </script>
 </body>
 </html>

@@ -11,5 +11,5 @@ $('#toggleBtn').on('click', function () {
 
         initOverviewChart();
 
-    }, 310); // CSS transition time
+    }, 310);
 });

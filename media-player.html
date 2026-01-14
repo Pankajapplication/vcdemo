@@ -93,7 +93,7 @@
                             </video>
                         </div>
                         <div class="col-md-4">
-                            <h6 class="mb-2">June Campaign Kickoff</h6>
+                            <h6 class="mb-2">Demo Video</h6>
 
                             <p class="small text-muted">
                                 This sample video demonstrates the VideoCrypt media player interface.
@@ -136,55 +136,64 @@
                     Demo only · All analytics data shown is sample and illustrative
                 </span>
             </div>
+            <iframe src="loader.html" id="loader" style="width: 100%;height: 100vh; position: absolute;top: 0;left:0;z-index: 99999; background: #000; border: 0;display: none;"></iframe>
         </main>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="assets/js/chart.js"></script>
+    <!-- <script src="assets/js/chart.js"></script> -->
     <script>
+    function scroll(){
+        let Element = document.querySelector('.dashboard');
+        Element.scroll({
+                top:'00',
+                left:'0',
+                behavior:'smooth',
+        });
+    }
      let videoDemo = {
-    video1: {
-        title:'video title 1',
-        duration:'2:14',
-        uploadDate:'Feb 17, 2025',
-        resolution:'1080p',
-        status:'Demo',
-        thumbnail:'assets/img/img-1.jpg',
-        url:'assets/video/video-demo-1.mp4',
-        description: 'This is a demo video showing VideoCrypt media player features.',
-    },
-    video2: {
-        title:'video title 2',
-        duration:'2:14',
-        uploadDate:'Feb 17, 2025',
-        resolution:'1080p',
-        status:'Uploaded',
-        thumbnail:'assets/img/img-2.jpg',
-        url:'assets/video/video-demo-2.mp4',
-        description: 'This video demonstrates uploaded video functionality in the player.',
-    },
-    video3: {
-        title:'video title 3',
-        duration:'2:14',
-        uploadDate:'Feb 17, 2025',
-        resolution:'1080p',
-        status:'Uploaded',
-        thumbnail:'assets/img/img-3.jpg',
-        url:'assets/video/video-demo-3.mp4',
-        description: 'This video demonstrates uploaded video functionality in the player.',
-    },
-    video4: {
-        title:'video title 4',
-        duration:'2:14',
-        uploadDate:'Feb 17, 2025',
-        resolution:'1080p',
-        status:'Uploaded',
-        thumbnail:'assets/img/img-4.jpg',
-        url:'assets/video/video-demo-4.mp4',
-        description: 'This video demonstrates uploaded video functionality in the player.',
-    },
-};
+        video1: {
+            title:'Demo Video 1',
+            duration:'2:14',
+            uploadDate:'Feb 17, 2025',
+            resolution:'1080p',
+            status:'Demo',
+            thumbnail:'assets/img/img-1.jpg',
+            url:'assets/video/video-demo-1.mp4',
+            description: 'This is a demo video showing VideoCrypt media player features.',
+        },
+        video2: {
+            title:'Demo Video 2',
+            duration:'2:14',
+            uploadDate:'Feb 17, 2025',
+            resolution:'1080p',
+            status:'Uploaded',
+            thumbnail:'assets/img/img-2.jpg',
+            url:'assets/video/video-demo-2.mp4',
+            description: 'This video demonstrates uploaded video functionality in the player.',
+        },
+        video3: {
+            title:'Demo Video 3',
+            duration:'2:14',
+            uploadDate:'Feb 17, 2025',
+            resolution:'1080p',
+            status:'Uploaded',
+            thumbnail:'assets/img/img-3.jpg',
+            url:'assets/video/video-demo-3.mp4',
+            description: 'This video demonstrates uploaded video functionality in the player.',
+        },
+        video4: {
+            title:'Demo Video 4',
+            duration:'2:14',
+            uploadDate:'Feb 17, 2025',
+            resolution:'1080p',
+            status:'Uploaded',
+            thumbnail:'assets/img/img-4.jpg',
+            url:'assets/video/video-demo-4.mp4',
+            description: 'This video demonstrates uploaded video functionality in the player.',
+        },
+    };
 
 const videoPlaylistWrapper = document.querySelector('#videoPlay');
 const demoVideo = document.querySelector('#demoVideo');
@@ -216,15 +225,19 @@ document.querySelectorAll('.playlist-video').forEach(item => {
     item.addEventListener('click', function() {
         const key = this.getAttribute('data-key');
         const video = videoDemo[key];
-
+        let loader = document.querySelector('#loader');
         // Update main player source
         demoVideo.src = video.url;
         demoVideo.poster = video.thumbnail;
-        demoVideo.play();
+        // demoVideo.play();
+        scroll();
+        setTimeout(() => {
+            loader.style.display = 'block!important';
+        }, 3000);
 
         // Update main player metadata
         const infoSection = demoVideo.closest('.row').querySelector('.col-md-4');
-        infoSection.querySelector('h6').textContent = video.title;
+        infoSection.querySelector('h6').textContent = video.title.toUpperCase();
         const infoList = infoSection.querySelectorAll('ul.list-unstyled li');
         infoList[0].innerHTML = `<strong>Duration:</strong> ${video.duration}`;
         infoList[1].innerHTML = `<strong>Uploaded:</strong> ${video.uploadDate}`;

@@ -92,7 +92,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tableBody">
                         <tr>
                             <td><img src="https://images.unsplash.com/photo-1653045474061-075ba29db54f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzY2ktZmklMjBtb3ZpZSUyMHNjZW5lfGVufDF8fHx8MTc2NjM4NDczMnww&ixlib=rb-4.1.0&q=80&w=1080"
                                     alt="Quantum Horizon" /></td>
@@ -111,7 +111,20 @@
                             <td>1h 45m</td>
                             <td>0.89M</td>
                             <td><span class="badge-published">Published</span></td>
-                            <td><span class="actions">&#8942;</span></td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="p-0 m-0 bg-transparent border-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="actions m-0">&#8942;</span>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">
+                                            Details
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td><img src="https://images.unsplash.com/photo-1653045474061-075ba29db54f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzY2ktZmklMjBtb3ZpZSUyMHNjZW5lfGVufDF8fHx8MTc2NjM4NDczMnww&ixlib=rb-4.1.0&q=80&w=1080"
@@ -173,30 +186,24 @@
             </div>
         </main>
     </div>
-    <form id="uploadVideo">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Video Title">
-        </div>
-        <div class="form-group">
-            <label for="genre">Genre</label>
-            <select class="custom-select" id="category">
-                <option selected>Select Category</option>
-                <option value="1">Sci-Fi</option>
-                <option value="2">Romance</option>
-                <option value="3">Thriller</option>
-                <option value="4">Action</option>
-                <option value="5">Documentary</option>
-                <option value="6">Comedy</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="uploadVideo">Upload Video</label>
-            <input type="file" class="form-control-file" id="uploadVideo">
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Submit</button>
-    </form>
     <!-- Modal -->
+     <iframe src="loader.html" frameborder="0" id="loader"></iframe>
+         <!-- Video Player Modal -->
+<div class="modal fade" id="videoPlayerModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <video id="modalVideo" controls width="100%"></video>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="toast">
+    <span class="toastText">Success</span>
+</div>
     <div class="modal fade" id="VideoFormModal" tabindex="-1" aria-labelledby="VideoFormModalLabel" aria-hidden="true"
         data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
@@ -205,7 +212,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <form id="uploadVideo">
+                    <form id="form">
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" id="title" placeholder="Video Title">
@@ -213,20 +220,20 @@
                         <div class="form-group">
                             <label for="genre">Genre</label>
                             <select class="custom-select" id="category">
-                                <option selected>Select Category</option>
-                                <option value="1">Sci-Fi</option>
-                                <option value="2">Romance</option>
-                                <option value="3">Thriller</option>
-                                <option value="4">Action</option>
-                                <option value="5">Documentary</option>
-                                <option value="6">Comedy</option>
+                                <option selected value>Select Category</option>
+                                <option value="Sci-Fi">Sci-Fi</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Action">Action</option>
+                                <option value="Documentary">Documentary</option>
+                                <option value="Comedy">Comedy</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="uploadVideo">Upload Video</label>
-                            <input type="file" class="form-control-file" id="uploadVideo">
+                            <label for="uploadVideoFile">Upload Video</label>
+                            <input type="file" class="form-control-file" id="uploadVideoFile">
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                        <button type="submit" id="submitBtn" class="btn btn-primary w-100 mt-2">Submit</button>
                     </form>
                 </div>
                 <!-- <div class="modal-footer">
@@ -247,16 +254,179 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
     <script>
-        let videoForm = document.querySelector('#uploadVideo');
-        // function showError(El, Error){
-        //     El.nextElementSibling.textContent = Error;
-        // }
-        videoForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            let title = document.querySelector('#title');
-            let Category = document.querySelector('#category');
-            showError(title, 'Please Enter Title');
-        })
+      const videoForm = document.querySelector('#form');
+const uploadVideo = document.querySelector('#uploadVideoFile');
+const submitBtn = document.querySelector('#submitBtn');
+const loader = document.querySelector('#loader');
+const tableBody = document.querySelector('#tableBody');
+
+// Utility functions
+function showError(el, message) {
+    let errorSpan = el.nextElementSibling;
+    if (!errorSpan || !errorSpan.classList.contains('error')) {
+        errorSpan = document.createElement('span');
+        errorSpan.classList.add('error');
+        el.insertAdjacentElement('afterend', errorSpan);
+    }
+    errorSpan.textContent = message;
+}
+
+function generateRandomViews() {
+    const views = Math.floor(Math.random() * 2000000);
+    if (views >= 1000000) return (views / 1000000).toFixed(2) + 'M';
+    if (views >= 1000) return (views / 1000).toFixed(1) + 'K';
+    return views.toString();
+}
+
+function getVideoDuration(file) {
+    return new Promise((resolve) => {
+        const url = URL.createObjectURL(file);
+        const video = document.createElement('video');
+        video.preload = 'metadata';
+        video.src = url;
+
+        video.onloadedmetadata = () => {
+            URL.revokeObjectURL(url);
+            const durationSec = video.duration;
+            const h = Math.floor(durationSec / 3600);
+            const m = Math.floor((durationSec % 3600) / 60);
+            const s = Math.floor(durationSec % 60);
+            let formatted = '';
+            if (h > 0) formatted += h + 'h ';
+            if (m > 0 || h > 0) formatted += m + 'm ';
+            formatted += s + 's';
+            resolve(formatted);
+        };
+    });
+}
+
+function generateThumbnail(file) {
+    return new Promise((resolve) => {
+        const video = document.createElement('video');
+        video.preload = 'metadata';
+        video.src = URL.createObjectURL(file);
+        video.muted = true;
+        video.currentTime = 1;
+
+        video.onloadeddata = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 160;
+            canvas.height = 90;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL('image/png'));
+        };
+    });
+}
+
+function setupPlayButton(videoFile, playButton) {
+    playButton.addEventListener('click', () => {
+        const modalVideo = document.getElementById('modalVideo');
+        modalVideo.src = URL.createObjectURL(videoFile);
+        $('#videoPlayerModal').modal('show');
+        modalVideo.play();
+    });
+}
+
+function validateFile(file) {
+    const acceptedFileTypes = ['mp4', 'mkv'];
+    const ext = file.name.split('.').pop().toLowerCase();
+    const maxSize = 100 * 1024 * 1024;
+
+    if (!acceptedFileTypes.includes(ext)) {
+        showError(uploadVideo, `Only ${acceptedFileTypes.join(', ')} files are supported`);
+        return false;
+    }
+    if (file.size > maxSize) {
+        showError(uploadVideo, 'File size must be less than 100MB');
+        return false;
+    }
+    showError(uploadVideo, '');
+    return true;
+}
+
+function setLoading(isLoading) {
+    loader.style.display = isLoading ? 'block' : 'none';
+    submitBtn.disabled = isLoading;
+}
+
+async function addRowToTable(data) {
+    const tr = document.createElement('tr');
+    const thumbnail = data.file ? await generateThumbnail(data.file) : data.thumbnail;
+
+    tr.innerHTML = `
+        <td><img src="${thumbnail}" alt="${data.title}" width="160"/></td>
+        <td>${data.title}</td>
+        <td><span class="badge-genre badge-${data.category.toLowerCase()}">${data.category}</span></td>
+        <td>${data.duration}</td>
+        <td>${data.views}</td>
+        <td><span class="badge-published">Published</span></td>
+        <td>
+            <div class="dropdown">
+                <button class="p-0 m-0 bg-transparent border-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="actions m-0">&#8942;</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item play-btn" href="#">Play</a>
+                </div>
+            </div>    
+        </td>
+    `;
+    tableBody.prepend(tr);
+
+    const playButton = tr.querySelector('.play-btn');
+    if (data.file) setupPlayButton(data.file, playButton);
+}
+
+// Load data from localStorage on page load (only metadata + thumbnail)
+function loadLocalStorageData() {
+    const savedData = JSON.parse(localStorage.getItem('Data')) || [];
+    savedData.forEach(d => addRowToTable(d));
+    localStorage.removeItem('Data');
+}
+
+// Form submission
+videoForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const title = document.querySelector('#title').value.trim();
+    const category = document.querySelector('#category').value;
+    const file = uploadVideo.files[0];
+
+    // Validation
+    if (!title || !category || !file || !validateFile(file)) return;
+
+    setLoading(true);
+
+    const duration = await getVideoDuration(file);
+    const views = generateRandomViews();
+
+    const data = { title, category, file, duration, views };
+
+    // Optional: store metadata + thumbnail in localStorage
+    const thumbnail = await generateThumbnail(file);
+    const storageData = { ...data, file: null, thumbnail }; // file cannot go in localStorage
+    localStorage.setItem('Data', JSON.stringify([storageData]));
+
+    // Simulate processing
+    setTimeout(async () => {
+        await addRowToTable(data); // real row with File object for playback
+        setLoading(false);
+        videoForm.reset();
+        $('#VideoFormModal').modal('hide');
+        localStorage.removeItem('Data'); // clear
+    }, 800);
+});
+
+// Load saved rows
+loadLocalStorageData();
+
+let toast = document.querySelector('#toast');
+document.addEventListener('DOMContentLoaded', function(){
+    function toast(status, Error){
+        
+    }
+})
     </script>
 </body>
 
